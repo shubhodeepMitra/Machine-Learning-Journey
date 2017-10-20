@@ -1,8 +1,26 @@
 #!/usr/bin/python
 
+"""
+    Shubhodeep Mitra
+    20/10/2017
+
+    This is the code to accompany the Lesson 5 (Choose-Your-Own Algorithm) mini-project(Udacity).
+
+    Use a KNN,RandomForestClassifier, adaboost to identify emails from the Enron corpus by their authors:
+    Sara has label 0
+    Chris has label 1
+"""
+
+
+
 import matplotlib.pyplot as plt
 from prep_terrain_data import makeTerrainData
 from class_vis import prettyPicture
+from time import time
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.metrics import accuracy_score
+from sklearn.neighbors import KNeighborsClassifier
 
 features_train, labels_train, features_test, labels_test = makeTerrainData()
 
@@ -28,10 +46,32 @@ plt.show()
 ################################################################################
 
 
-### your code here!  name your classifier object clf if you want the 
+### your code here!  name your classifier object clf if you want the
 ### visualization code (prettyPicture) to show you the decision boundary
 
+## Random Forest Classifier
+## clf = RandomForestClassifier(n_estimators=10)
 
+## K-Nearest Neighbors
+clf=KNeighborsClassifier(n_neighbors=1)
+
+## AdaBoost Classifier
+## clf = AdaBoostClassifier()
+
+ini_t=time()
+clf = clf.fit(features_train,labels_train)
+
+train_t= time()
+print "training time:",str(train_t - ini_t)
+
+pred=clf.predict(features_test)
+
+pred_t=time()
+print "prediction time:",str(pred_t - train_t)
+
+acc=accuracy_score(labels_test,pred)
+
+print "accuracy:",str(acc)
 
 
 
