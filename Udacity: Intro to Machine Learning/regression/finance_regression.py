@@ -98,6 +98,9 @@ except NameError:
 ## task: to check how outliers effect regression
 reg.fit(feature_test, target_test)
 plt.plot(feature_train, reg.predict(feature_train), color="g")
+print "New regression-slope",reg.coef_
+print "New regression-intercept",reg.intercept_
+
 
 plt.xlabel(features_list[1])
 plt.ylabel(features_list[0])
